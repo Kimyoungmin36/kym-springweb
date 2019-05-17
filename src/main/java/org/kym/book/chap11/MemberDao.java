@@ -28,4 +28,7 @@ public interface MemberDao {
 		 * 회원 수
 		 */
 		int countAll();
+		
+		Member selectByLogin(String email, String password);
+		
 }
