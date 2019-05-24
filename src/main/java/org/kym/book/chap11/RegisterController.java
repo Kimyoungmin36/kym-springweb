@@ -19,7 +19,7 @@ public class RegisterController {
 	@Autowired
 	MemberDao memberDao;
 
-	static final Logger logger = LogManager.getLogger();
+	Logger logger = LogManager.getLogger();
 
 	@RequestMapping("/main")
 	public String main() {
