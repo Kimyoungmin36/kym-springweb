@@ -3,7 +3,7 @@
 <html>
 <head>
 <base href="${pageContext.request.contextPath }/" />
-<title>게시판</title>
+<title>글 등록</title>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>

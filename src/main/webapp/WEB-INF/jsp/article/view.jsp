@@ -7,9 +7,19 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-	<h2>글 보기</h2>
+	<h2>글 보기</h2> 
+ 	<c:if test="${param.mode=='FAILURE'}"> 
+ 		<p style="color: red;">권한이 없습니다.</p> 
+ 	</c:if> 
+	
 	<p>
-		<a href="./app/article/list">글 목록</a>
+		<a href="./app/article/list">글 목록</a>|
+		<span>
+		<a href="./app/article/updateForm?articleId=${article.articleId }">글 수정</a>
+		</span>|
+		<span>
+		<a href="./app/article/delete?articleId=${article.articleId }">글 삭제</a>
+		</span>
 	</p>
 	<hr />
 	<p>

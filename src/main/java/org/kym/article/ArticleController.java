@@ -45,18 +45,59 @@ public class ArticleController {
 		model.addAttribute("article", article);
 	}
 
-
 	/**
 	 * 글 등록
 	 */
 	@PostMapping("/article/add")
-	public String articleAdd(Article article, @SessionAttribute("MEMBER") Member member) {
-
-
-		// 아이디와 이름을 세션의 값으로 사용
+	public String articleAdd(Article article, 
+			@SessionAttribute("MEMBER") Member member) {
 		article.setUserId(member.getMemberId());
 		article.setName(member.getName());
 		articleDao.addArticle(article);
 		return "redirect:/app/article/list";
 	}
+	
+	@GetMapping("/article/updateForm") 
+	public String articleUpdateForm(@RequestParam("articleId") String articleId, 
+			@SessionAttribute("MEMBER") Member member, Model model) { 
+		Article article = articleDao.getArticle(articleId); 
+		if (!article.getUserId().equals(member.getMemberId())) { 
+			return "article/updateFail"; 
+		} 
+		model.addAttribute("article", article); 
+		return "article/updateForm"; 
+	} 
+
+	/**
+	 * 글 수정
+	 */
+	@PostMapping("/article/update") 
+	public String articleUpdate(Article article) { 
+ 	articleDao.updateArticle(article); 
+ 	return "redirect:/app/article/view?articleId=" + article.getArticleId(); 
+ 	} 
+
+	/**
+	 * 글 삭제
+	 */
+	@GetMapping("/article/delete") 
+	public String articleDelete(@RequestParam("articleId") String articleId, @SessionAttribute("MEMBER") Member member) { 
+		Article article = articleDao.getArticle(articleId); 
+		if (!article.getUserId().equals(member.getMemberId())) { 
+			return "article/deleteFail"; 
+		} 
+		articleDao.deleteArticle(articleId); 
+		return "article/delete"; 
+	}
+	
+	
+	@PostMapping("/article/updateFail") 
+	public String updateFail() { 
+		return "article/updateFail"; 
+	} 
+
+	@GetMapping("/article/deleteFail") 
+	public String deleteFail() { 
+		return "article/deleteFail"; 
+	} 
 }
