@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
-<!-- 회원 목록 -->
 <html>
 <head>
 <base href="${pageContext.request.contextPath }/" />
@@ -31,7 +30,8 @@
 					<td>${member.email }</td>
 					<td>${member.name }</td>
 					<td>${member.cdate }</td>
-				</tr>
+					<td><a href="./app/letter/addForm?receiverId=${member.memberId }&receiverName=${member.name}">메일 쓰기</a></td>
+				</tr>		
 			</c:forEach>
 		</tbody>
 	</table>

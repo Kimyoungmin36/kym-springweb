@@ -22,7 +22,7 @@ public class ArticleDao {
 	static final String UPDATE_ARTICLE = "update article set title=?, content=? where (articleId, userId) = (?,?)";
 
 	static final String DELETE_ARTICLE = "delete from article where (articleId, userId) = (?,?)";
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -30,7 +30,7 @@ public class ArticleDao {
 			Article.class);
 
 	/**
-	 * 글목록
+	 * 글 목록
 	 */
 	public List<Article> listArticles(int offset, int count) {
 		return jdbcTemplate.query(LIST_ARTICLES, articleRowMapper, offset,
@@ -45,7 +45,7 @@ public class ArticleDao {
 	}
 
 	/**
-	 * 글조회
+	 * 글 조회
 	 */
 	public Article getArticle(String articleId) {
 		return jdbcTemplate.queryForObject(GET_ARTICLE, articleRowMapper,
@@ -53,12 +53,13 @@ public class ArticleDao {
 	}
 
 	/**
-	 * 글등록
+	 * 글 등록
 	 */
 	public int addArticle(Article article) {
 		return jdbcTemplate.update(ADD_ARTICLE, article.getTitle(),
 				article.getContent(), article.getUserId(), article.getName());
 	}
+
 	/**
 	 * 글 수정
 	 */
